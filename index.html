@@ -27,40 +27,56 @@
             overflow: hidden;
         }
 
-        /* --- ÍNDICE IZQUIERDA --- */
+        /* --- ÍNDICE IZQUIERDA (APARTADOS PEQUEÑOS) --- */
         #sidebar {
-            width: 300px;
-            background-color: #020202;
-            border-right: 1px solid var(--azul);
+            width: 350px;
+            background-color: #000000;
+            border-right: 2px solid var(--morado);
             overflow-y: auto;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
         }
 
         #sidebar h2 {
             color: var(--morado);
-            font-size: 1.2em;
+            font-size: 1.5em;
             text-align: center;
-            border-bottom: 1px solid var(--morado);
-            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .separador-indice {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--morado), transparent);
+            margin-bottom: 20px;
+        }
+
+        #index-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Espacio entre cada botoncito */
         }
 
         .index-link {
             color: var(--texto);
             text-decoration: none;
-            font-size: 0.9em;
-            padding: 8px;
+            font-size: 0.85em;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid var(--borde);
             border-radius: 4px;
-            transition: 0.3s;
-            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: block;
+            line-height: 1.2;
         }
 
         .index-link:hover {
             background: #111;
-            border-left: 2px solid var(--azul);
-            color: var(--azul);
+            border-color: var(--azul);
+            transform: translateX(5px);
+            box-shadow: -5px 0px 0px var(--azul);
         }
 
         /* --- CONTENIDO DERECHA --- */
@@ -68,7 +84,7 @@
             flex-grow: 1;
             overflow-y: auto;
             padding: 40px;
-            background: radial-gradient(circle at top right, #000033, #000000);
+            background: radial-gradient(circle at top right, #000022, #000000);
         }
 
         .tos-header {
@@ -76,57 +92,53 @@
             margin-bottom: 50px;
         }
 
-        .tos-header h1 { color: var(--morado); font-size: 2.5em; }
+        .tos-header h1 { color: var(--morado); font-size: 2.2em; text-shadow: 0 0 10px var(--morado); }
 
         .apartado-caja {
             background-color: var(--fondo-caja);
             border: 1px solid var(--borde);
             border-radius: 8px;
             padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
-        }
-
-        .apartado-caja:hover {
-            border-color: var(--azul);
-            transform: translateY(-5px);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .apartado-caja h2 {
             margin-top: 0;
             color: var(--azul);
-            border-bottom: 1px solid #222;
-            padding-bottom: 10px;
+            font-size: 1.4em;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .typing-text {
             white-space: pre-wrap;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95em;
         }
 
-        /* Colores específicos dentro del texto */
-        .txt-rojo { color: var(--rojo); font-weight: bold; }
-        .txt-azul { color: var(--azul); }
-        .txt-morado { color: var(--morado); }
-
-        /* Scrollbar Personalizada */
-        ::-webkit-scrollbar { width: 8px; }
+        /* Scrollbar Estilo Gaming */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--azul); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--morado); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--azul); }
     </style>
 </head>
 <body>
 
 <nav id="sidebar">
-    <h2>ÍNDICE</h2>
-    <div id="index-list"></div>
+    <h2>Índice</h2>
+    <div class="separador-indice"></div>
+    <div id="index-list">
+        </div>
 </nav>
 
 <main id="main-content">
     <div class="tos-header">
-        <h1>📜 Términos y Condiciones de Servicio (TOS)</h1>
-        <p id="intro-text" class="typing-text"></p>
+        <h1>📜 Términos y Condiciones de Servicio</h1>
+        <p id="intro-text" class="typing-text" style="text-align: center; color: #888;"></p>
     </div>
 
     <div id="cajas-container">
@@ -167,7 +179,7 @@ const tosData = [
     { n: "30", t: "Acuerdo de Confidencialidad sobre Soporte", c: "Prohibición de Filtrar Tickets: Queda prohibido compartir capturas de pantalla o grabaciones de los tickets de soporte, conversaciones privadas con el staff o métodos de resolución de errores sin consentimiento previo. Filtrar esta información con el fin de dañar la imagen del servidor resultará en la revocación de todas las licencias del cliente." },
     { n: "31", t: "Clausula de Sentido Común y Comportamiento", c: "Interpretación de los Términos: La administración se reserva el derecho de interpretar estos términos ante situaciones no previstas. Cualquier intento de buscar \"vacíos legales\" en esta normativa para perjudicar al servidor será motivo de sanción.\nRespeto a la Comunidad: El comportamiento errático, las amenazas de difamación o el intento de sabotaje a otros clientes o al staff resultará en la terminación inmediata de todos tus servicios, sin derecho a reembolso, basándonos en el incumplimiento del código de conducta del servidor." },
     { n: "32", t: "Compras para Terceros y Regalos (Gifts)", c: "Responsabilidad del Comprador: Si realizas una compra para un tercero, pierdes el control sobre la licencia una vez entregada al destinatario final. No se realizarán cambios de propietario de licencia a menos que haya una justificación de fuerza mayor aceptada por el staff.\nDisputas entre Usuarios: No intervenimos en conflictos personales entre usuarios. Si compras algo para alguien y luego te arrepientes, no se hará devolución del dinero ni se retirará el producto al destinatario para devolvértelo a ti." },
-    { n: "33", t: "Clausula de Sentido Común y Comportamiento (BIS)", c: "Interpretación de los Términos: La administración se reserva el derecho de interpretar estos términos ante situaciones no previstas. Cualquier intento de buscar \"vacíos legales\" en esta normativa para perjudicar al servidor será motivo de sanción.\nRespeto a la Comunidad: El comportamiento errático, las amenazas de difamación o el intento de sabotaje a otros clientes o al staff resultará en la terminación inmediata de todos tus servicios, sin derecho a reembolso, basándonos en el incumplimiento del código de conducta del servidor." },
+    { n: "33", t: "Clausula de Sentido Común y Comportamiento", c: "Interpretación de los Términos: La administración se reserva el derecho de interpretar estos términos ante situaciones no previstas. Cualquier intento de buscar \"vacíos legales\" en esta normativa para perjudicar al servidor será motivo de sanción.\nRespeto a la Comunidad: El comportamiento errático, las amenazas de difamación o el intento de sabotaje a otros clientes o al staff resultará en la terminación inmediata de todos tus servicios, sin derecho a reembolso, basándonos en el incumplimiento del código de conducta del servidor." },
     { n: "34", t: "Ciclo de Vida del Soporte y Obsolescencia", c: "Periodo de Soporte Activo: El soporte técnico gratuito para la instalación y errores del producto está garantizado por un periodo de 30 días tras la compra.\nProductos Descatalogados: Si un producto es retirado de la tienda o deja de recibir actualizaciones por parte del desarrollador (EoL - End of Life), el soporte para dicho producto cesará. No estamos obligados a hacer funcionar productos antiguos en sistemas o versiones de servidores nuevas." },
     { n: "35", t: "Prohibición de Coacción y Reseñas Falsas", c: "Chantaje por Soporte: Queda prohibido el uso de amenazas con reseñas negativas, reportes falsos o difamación para obtener beneficios extra, reembolsos o soporte prioritario.\nSanción: Cualquier intento de coacción resultará en la cancelación inmediata de todos los servicios y el baneo del servidor sin derecho a réplica." },
     { n: "36", t: "Requisitos de Hardware y Software del Cliente", c: "Entorno del Cliente: Es responsabilidad del cliente tener un PC y una conexión a internet capaces de ejecutar los programas necesarios (FiveM, Discord, Visual Studio Code, etc.).\nFallo Local: No se darán reembolsos ni soporte extendido si el producto no funciona debido a virus en el PC del cliente, bloqueos de firewall, ISPs con puertos cerrados o hardware insuficiente." },
@@ -179,7 +191,7 @@ const indexContainer = document.getElementById('index-list');
 const boxesContainer = document.getElementById('cajas-container');
 
 // FUNCIÓN PARA EFECTO LETRA POR LETRA
-function typeEffect(element, text, speed = 5) {
+function typeEffect(element, text, speed = 1) {
     let i = 0;
     function typing() {
         if (i < text.length) {
@@ -193,14 +205,14 @@ function typeEffect(element, text, speed = 5) {
 
 // GENERAR ESTRUCTURA
 tosData.forEach((item) => {
-    // Crear enlace índice
+    // Crear apartado en el índice (BOTÓN)
     const link = document.createElement('a');
     link.href = `#seccion-${item.n}`;
     link.className = 'index-link';
     link.textContent = `${item.n}. ${item.t}`;
     indexContainer.appendChild(link);
 
-    // Crear Caja de Contenido
+    // Crear Caja de Contenido a la derecha
     const caja = document.createElement('div');
     caja.id = `seccion-${item.n}`;
     caja.className = 'apartado-caja';
@@ -208,12 +220,12 @@ tosData.forEach((item) => {
     boxesContainer.appendChild(caja);
 });
 
-// INICIAR EFECTO DE ESCRITURA
+// INICIAR EFECTO AL CARGAR
 window.onload = () => {
     typeEffect(document.getElementById('intro-text'), intro, 10);
     tosData.forEach(item => {
         const el = document.getElementById(`text-${item.n}`);
-        typeEffect(el, item.c, 2);
+        typeEffect(el, item.c, 1);
     });
 };
 </script>
